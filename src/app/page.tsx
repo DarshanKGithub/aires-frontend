@@ -1,65 +1,101 @@
-import Image from "next/image";
+// src/app/page.tsx
+"use client";
+
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { ArrowRight, Upload, Brain, Shield, Zap, Sparkles, FileText } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="min-h-screen text-white">
+      {/* Hero */}
+      <section className="relative min-h-screen flex items-center justify-center px-6">
+        <div className="max-w-7xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-lg border border-white/20 rounded-full px-6 py-3 mb-8">
+              <Sparkles className="w-5 h-5 text-yellow-400" />
+              <span className="text-sm font-medium">AI-Powered Resume Parsing • 10x Faster Hiring</span>
+            </div>
+
+            <h1 className="text-6xl md:text-8xl font-bold leading-tight">
+              The Future of
+              <br />
+              <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                Resume Intelligence
+              </span>
+            </h1>
+
+            <p className="mt-8 text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+              Upload any resume. Extract name, skills, experience, contact — instantly.
+              <br />
+              Powered by advanced AI. Built for recruiters who value time.
+            </p>
+
+            <div className="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button asChild size="lg" className="text-lg px-10 py-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-2xl hover:shadow-purple-500/50">
+                  <Link href="/register">
+                    Start Free Now
+                    <ArrowRight className="ml-3 w-6 h-6" />
+                  </Link>
+                </Button>
+              </motion.div>
+              <Button asChild size="lg" variant="outline" className="text-lg px-10 py-8 text-black border-white/30">
+                <Link href="/login">Sign In</Link>
+              </Button>
+            </div>
+          </motion.div>
+
+          {/* Floating Cards */}
+          <div className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {[
+              { icon: Brain, title: "AI Extraction", desc: "Smart parsing of skills, experience, education" },
+              { icon: Zap, title: "Instant Results", desc: "Process 100 resumes in under 60 seconds" },
+              { icon: Shield, title: "100% Secure", desc: "Encrypted storage • GDPR compliant" },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.2 }}
+                whileHover={{ y: -10 }}
+              >
+                <Card className="p-8 bg-white/10 backdrop-blur-lg border-white/20 hover:bg-white/20 transition-all">
+                  <item.icon className="w-12 h-12 mb-4 text-blue-400" />
+                  <h3 className="text-2xl text-white font-bold mb-3">{item.title}</h3>
+                  <p className="text-gray-300">{item.desc}</p>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* CTA */}
+      <section className="py-32 text-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-5xl md:text-6xl font-bold mb-8">
+            Ready to Transform Your Hiring?
+          </h2>
+          <Button asChild size="lg" className="text-2xl px-16 py-10 bg-gradient-to-r from-pink-500 to-purple-600 hover:shadow-2xl hover:shadow-pink-500/50">
+            <Link href="/register">
+              Get Started — It's Free
+              <Sparkles className="ml-4 w-8 h-8" />
+            </Link>
+          </Button>
+        </motion.div>
+      </section>
     </div>
   );
 }
